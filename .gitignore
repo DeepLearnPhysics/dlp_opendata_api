@@ -1,0 +1,8 @@
+*.pyc
+*.txt
+*.dat
+*.root
+*.bin
+*.data
+*~
+*.csv
