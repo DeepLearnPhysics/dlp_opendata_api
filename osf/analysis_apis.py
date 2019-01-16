@@ -11,6 +11,27 @@ except ImportError:
     import sys
     sys.exit(1)
 
+def list_data(filepath):
+    """
+    A function to list data objects in larcv file
+    Args:
+        filepath (string): the full (or relative) path to a larcv binary data file
+    Returns:
+        list of object names
+    """
+    
+    from ROOT import TFile
+    f=TFile.Open(filepath)
+    result = []
+    for key in f.GetListOfKeys():
+        name = str(key.GetName())
+        if not name.endswith('_tree'): continue
+        name = name.replace('_tree','')
+        if name in result: continue
+        result.append(name)
+    f.Close()
+    return result
+
 class data_reader(object):
     """
     A class that can be useful to interface data files, move data index, and get data pointers.
@@ -31,7 +52,11 @@ class data_reader(object):
             if name in self._names: continue
             self._names.append(name)
             self._chains.append(TChain(name + '_tree'))
-            for f in self._input_files: self._chains[-1].AddFile(f)
+            for f in self._input_files:
+                if name in list_data(f):
+                    self._chains[-1].AddFile(f)
+                else:
+                    print('Warning: %s is not in file %s' % (name,f))                    
 
     def add_file(self,*files):
         """
@@ -42,7 +67,12 @@ class data_reader(object):
         for f in files:
             if f in self._input_files: continue
             self._input_files.append(f)
-            for c in self._chains: c.AddFile(f)
+            for c in self._chains:
+                cname = str(c.GetName()).replace('_tree','')
+                if cname in list_data(f):
+                    c.AddFile(f)
+                else:
+                    print('Warning: %s is not in file %s' % (cname,f))
 
     def read(self,entry):
         """
@@ -83,7 +113,7 @@ def parse_tensor2d(event_tensor2d):
     """
     result = []
     for tensor2d in event_tensor2d.as_vector():
-        img = larcv.as_image2d(vs)
+        img = larcv.as_image2d(tensor2d)
         result.append(np.array(larcv.as_ndarray(img)))
     return result
 
