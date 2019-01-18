@@ -78,3 +78,46 @@ p = get_particle(event, 5) # gets particle 5
 ## Low-level API
 
 For some tasks, the high-level APIs above may abstract away too many detatils.  There is also a low-level API that you can use if you know what you're looking for.
+
+**See what's in a file*** 
+```python
+fname = 'dlprod_ppn_v10/dlprod_192px_00.root'
+list_data(fname)
+[out]: ['cluster3d_mcst', 'sparse3d_data', 'sparse3d_fivetypes', 'particle_mcst']
+```
+
+**Data Reader**
+The `data_reader` class handles the input.
+
+Initialization:
+```python
+reader = data_reader()
+```
+Add a file to read from:
+```python
+reader.add_file(fname)
+```
+Add data to read (use `list_data` to see options):
+```python
+reader.add_data('sparse3d_data')
+```
+See how many entries are available to read:
+```python
+reader.entry_count()
+```
+Set reader pointer to entry `i`
+```python
+i = 0
+reader.read(i)
+```
+Get the actual data (once pointer is set)
+```python
+preader.data('sparse3d_data')
+```
+There are also several provided parsers, such as
+```python
+parse_sparse3d(preader.data('sparse3d_data'))
+```
+
+The two high-level APIs use `data_reader` as a base class, so you can also do the above manipulations to `image_reader_3d` and `particle_reader` instances.  However, their purpose is to wrap everything so it is a bit easier to use.
+
