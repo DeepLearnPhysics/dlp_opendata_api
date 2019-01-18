@@ -22,7 +22,7 @@ fname = 'dlprod_ppn_v10/dlprod_192px_00.root'
 img_reader = image_reader_3d(fname)
 ```
 
-**Useage**
+**Usage**
 
 See how many events are in the file:
 ```python
@@ -58,7 +58,7 @@ fname = 'dlprod_ppn_v10/particle/dlprod_particle_192px_00.root'
 preader = particle_reader(fname)
 ```
 
-**Useage**
+**Usage**
 
 See how many events there are in the file:
 ```python
