@@ -1,5 +1,5 @@
 # High-level API for loading images
-from analysis_apis import data_reader
+from analysis_apis import data_reader, parse_sparse3d
 
 class image_reader_3d(data_reader):
     """
@@ -48,7 +48,7 @@ class image_reader_3d(data_reader):
             energy: numpy vector of length N of energy
             classes: numpy vector of length N of classes
         """
-        img_reader.read(n)
+        self.read(n)
         voxels, energy = parse_sparse3d(self.data('sparse3d_data')) # voxels, energy
         _, classes = parse_sparse3d(self.data('sparse3d_fivetypes')) # voxels, classes
         return voxels, energy.flatten(), classes.flatten()
