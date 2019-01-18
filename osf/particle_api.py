@@ -13,16 +13,16 @@ class particle_reader(data_reader):
         for f in files:
             self.add_file(f)
             
-    def get_event(preader, n):
-    """
-    Get event from particle reader
-    Args:
-        n (int): index of event
-    Return:
-        particles (dict): particle information organized by key and associated array (index uniquely identify a particle)
-    """
-    self.read(n)
-    return parse_particle(preader.data('particle_mcst'))
+    def get_event(self, n):
+        """
+        Get event from particle reader
+        Args:
+            n (int): index of event
+        Return:
+            particles (dict): particle information organized by key and associated array (index uniquely identify a particle)
+        """
+        self.read(n)
+        return parse_particle(self.data('particle_mcst'))
 
 
 def get_particle(event, n):

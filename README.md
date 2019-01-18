@@ -16,13 +16,13 @@ The image API is in the `osf.image_api` submodule.  A 3D image API is built arou
 from osf.image_api import image_reader_3d
 ```
 
-*Initialization* The image reader is initialized by providing a file name (or more than one)
+**Initialization** The image reader is initialized by providing a file name (or more than one)
 ```python
 fname = 'dlprod_ppn_v10/dlprod_192px_00.root'
 img_reader = image_reader_3d(fname)
 ```
 
-*Useage*
+**Useage**
 
 See how many events are in the file:
 ```python
@@ -46,6 +46,34 @@ voxels, energy, classes = img_reader.get_image(0)
 
 
 ## Particle API
+
+The particle API is in the `osf.particle_api` submodule.  
+```python
+from osf.particle_api import *
+```
+
+**Initialization** The particle reader is initialized by providing a file name (or more than one)
+```python
+fname = 'dlprod_ppn_v10/particle/dlprod_particle_192px_00.root'
+preader = particle_reader(fname)
+```
+
+**Useage**
+
+See how many events there are in the file:
+```python
+preader.entry_count()
+```
+
+Get event 0 in the file:
+```python
+event = preader.get_event(0)
+```
+
+The event is a dictionary of particle data.  If you want to get an individual particle from the event, use
+```python
+p = get_particle(event, 5) # gets particle 5
+```
 
 ## Low-level API
 
