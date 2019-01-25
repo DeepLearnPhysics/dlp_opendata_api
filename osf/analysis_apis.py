@@ -234,7 +234,7 @@ def parse_particle(event_particle):
         elif not pdg_code in [11,-11,22]: category = 1
         elif pdg_code == 22: category = 2
         else:
-            if process in ['primary','nCapture','conv']: category = 2
+            if process in ['primary','nCapture','conv','compt']: category = 2
             elif process in ['muIoni','hIoni']: category = 3
             elif process in ['muMinusCaptureAtRest','muPlusCaptureAtRest','Decay']: category = 4
             else:
