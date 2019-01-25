@@ -102,6 +102,10 @@ class data_reader(object):
         """
         if len(self._chains) < 1: return 0
         return self._chains[0].GetEntries()
+    
+    def __len__(self):
+        return self.entry_count()
+    
 
 def parse_tensor2d(event_tensor2d):
     """
