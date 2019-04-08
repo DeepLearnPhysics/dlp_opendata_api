@@ -75,6 +75,33 @@ The event is a dictionary of particle data.  If you want to get an individual pa
 p = get_particle(event, 5) # gets particle 5
 ```
 
+## Cluster API
+
+The cluster API is in the `osf.cluster_api` submodule.  
+```python
+from osf.cluster_api import *
+```
+
+**Initialization** The cluster reader is initialized by providing a file name (or more than one)
+```python
+fname = 'dlprod_ppn_v10/cluster/dlprod_cluster_192px_00.root'
+creader = cluster_reader(fname)
+```
+
+**Usage**
+
+See how many events there are in the file:
+```python
+creader.entry_count()
+```
+
+Get cluster labels from event:
+```python
+eventn = 0
+voxels, labels= img_reader.get_classes(eventn)
+```
+
+
 ## Low-level API
 
 For some tasks, the high-level APIs above may abstract away too many detatils.  There is also a low-level API that you can use if you know what you're looking for.
