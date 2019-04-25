@@ -38,3 +38,21 @@ def get_particle(event, n):
     for k in event:
         p[k] = event[k][n]
     return p
+
+
+def get_start(p):
+    """
+    Get particle start position
+    input: particle dictionary
+    output: x,y,z
+    """
+    return p['start_x'], p['start_y'], p['start_z']
+
+
+def get_direction(p):
+    """
+    Get particle start direction
+    input: particle dictionary
+    output: px, py, pz
+    """
+    return p['direction_x'], p['direction_y'], p['direction_z']
