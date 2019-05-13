@@ -1,5 +1,5 @@
 # High-level API for loading particles
-from analysis_apis import data_reader, parse_particle
+from .analysis_apis import data_reader, parse_particle
 
 # TODO: particle event class with iterator, particle class
 

@@ -1,5 +1,5 @@
 # High-level API for loading images
-from analysis_apis import data_reader, parse_sparse3d
+from .analysis_apis import data_reader, parse_sparse3d
 
 class image_reader_3d(data_reader):
     """
