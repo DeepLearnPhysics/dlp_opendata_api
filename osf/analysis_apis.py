@@ -197,7 +197,9 @@ def parse_particle(event_particle):
                  'deposited_energy'  : np.zeros(num_particles,np.float32),
                  'npx'               : np.zeros(num_particles,np.int32),
                  'creation_process'  : ['']*num_particles,
-                 'category'          : np.zeros(num_particles,np.int8)
+                 'category'          : np.zeros(num_particles,np.int8),
+                 'track_id' : np.zeros(num_particles,np.int32),
+                 'parent_track_id' : np.zeros(num_particles,np.int32)
                  }
     
     for idx in range(num_particles):
@@ -227,6 +229,8 @@ def parse_particle(event_particle):
         part_info[ 'creation_momentum' ][idx] = momentum
         part_info[ 'deposited_energy'  ][idx] = np.float32(particle.energy_deposit())
         part_info[ 'npx'               ][idx] = np.int32(particle.num_voxels())
+        part_info[ 'parent_track_id'   ][idx] = np.int32(particle.parent_track_id())
+        part_info[ 'track_id'   ][idx] = np.int32(particle.track_id())
 
         category = -1
         process  = particle.creation_process()
