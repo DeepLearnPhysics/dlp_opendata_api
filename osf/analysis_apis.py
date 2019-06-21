@@ -199,7 +199,8 @@ def parse_particle(event_particle):
                  'creation_process'  : ['']*num_particles,
                  'category'          : np.zeros(num_particles,np.int8),
                  'track_id' : np.zeros(num_particles,np.int32),
-                 'parent_track_id' : np.zeros(num_particles,np.int32)
+                 'parent_track_id' : np.zeros(num_particles,np.int32),
+                 'num_voxels' : np.zeros(num_particles,np.int32)
                  }
     
     for idx in range(num_particles):
@@ -231,6 +232,7 @@ def parse_particle(event_particle):
         part_info[ 'npx'               ][idx] = np.int32(particle.num_voxels())
         part_info[ 'parent_track_id'   ][idx] = np.int32(particle.parent_track_id())
         part_info[ 'track_id'   ][idx] = np.int32(particle.track_id())
+        part_info[ 'num_voxels' ][idx] = np.int32(particle.num_voxels())
 
         category = -1
         process  = particle.creation_process()
